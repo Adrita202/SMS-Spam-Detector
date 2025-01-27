@@ -19,7 +19,7 @@ loaded_model, loaded_vectorizer = load_artifacts()
 
 @app.route('/')
 def home():
-    return render_template('index2.html')  # Render the HTML template
+    return render_template('index.html')  # Render the HTML template
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -32,7 +32,7 @@ def predict():
     
     # Return prediction to the HTML template
     result = "Spam" if prediction else "Not Spam"
-    return render_template('index2.html', message=message, prediction=result)
+    return render_template('index.html', message=message, prediction=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
