@@ -7,38 +7,85 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
             margin: 0;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
             text-align: center;
         }
-        form {
-            margin-top: 20px;
+        h1 {
+            font-size: 24px;
+            color: #4a90e2;
+            margin-bottom: 15px;
         }
-        input, button {
-            padding: 10px;
-            margin: 5px;
+        p {
+            margin: 10px 0;
+            color: #666;
+            font-size: 16px;
         }
-        #output {
-            margin-top: 20px;
+        input[type="text"] {
+            width: 90%;
             padding: 10px;
-            border: 1px solid #ccc;
-            display: inline-block;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #357abd;
+        }
+        .output-box {
             background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>SMS Spam Detection System</h1>
-    <form method="POST" action="/predict">
-        <input type="text" name="message" placeholder="Enter your message here" required>
-        <button type="submit">Check</button>
-    </form>
-
-    {% if message %}
-    <div id="output">
-        <p><strong>Input:</strong> {{ message }}</p>
-        <p><strong>Prediction:</strong> {{ prediction }}</p>
+    <div class="container">
+        <h1>SMS Spam Detector</h1>
+        <form method="POST" action="/predict">
+            <input type="text" name="message" placeholder="Type your message here" required>
+            <button type="submit">Detect</button>
+        </form>
+        {% if message %}
+        <div id="output">
+            <p><strong>Input:</strong> {{ message }}</p>
+            <p><strong>Prediction:</strong> {{ prediction }}</p>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </body>
 </html>
