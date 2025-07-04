@@ -147,6 +147,9 @@
             color: #fff;
             margin-left: 6px;
         }
+        .prediction.spam {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+        }
         @media (max-width: 600px) {
             .heading-widget, .container {
                 padding: 12px 2vw 10px 2vw;
@@ -188,7 +191,7 @@
             {% if message %}
             <div id="output">
                 <p><strong>Input:</strong> {{ message }}</p>
-                <p><strong>Prediction:</strong> <span class="prediction">{{ prediction }}</span></p>
+                <p><strong>Prediction:</strong> <span class="prediction{% if prediction == 'Spam' %} spam{% endif %}">{{ prediction }}</span></p>
             </div>
             {% endif %}
         </div>
