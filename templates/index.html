@@ -6,86 +6,192 @@
     <title>SMS Spam Detection</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
+            min-height: 100vh;
             margin: 0;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
         }
-        .container {
-            background: #ffffff;
-            padding: 30px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
+        .center-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .heading-widget {
+            width: 100%;
+            max-width: 390px;
+            background: rgba(255,255,255,0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(60, 60, 120, 0.18), 0 1.5px 6px 0 rgba(67,206,162,0.10);
+            margin-bottom: 18px;
+            padding: 22px 30px 12px 30px;
+            box-sizing: border-box;
             text-align: center;
         }
-        h1 {
-            font-size: 24px;
-            color: #4a90e2;
-            margin-bottom: 15px;
+        .main-heading {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
         }
-        p {
-            margin: 10px 0;
-            color: #666;
-            font-size: 16px;
+        .main-heading .spam-highlight {
+            background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .container {
+            background: rgba(255,255,255,0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 38px 30px 28px 30px;
+            width: 100%;
+            max-width: 390px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 32px 0 rgba(60, 60, 120, 0.18), 0 1.5px 6px 0 rgba(67,206,162,0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .subtitle {
+            color: #185a9d;
+            font-size: 1.08rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
         }
         input[type="text"] {
-            width: 90%;
-            padding: 10px;
-            margin: 15px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
+            flex: 1 1 auto;
+            padding: 13px 12px;
+            border: solid rgba(66, 158, 255, 0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.98);
+            color: #232526;
+            outline: none;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 1px 4px rgba(67,206,162,0.07);
+        }
+        input[type="text"]:focus {
+            box-shadow: 0 2px 8px rgba(67,206,162,0.18);
         }
         button {
-            background-color: #4a90e2;
-            color: #ffffff;
+            flex: 0 0 auto;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
+            border-radius: 8px;
+            padding: 13px 22px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 16px;
+            transition: background 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #357abd;
+            background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+            transform: translateY(-1px) scale(1.01);
         }
-        .output-box {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 20px;
+        .helper-text {
+            width: 100%;
+            color: #3a3a3a;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+            text-align: center;
+            opacity: 0.85;
         }
-        .back-link {
+        #output {
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 12px 10px 12px;
+            margin-top: 8px;
+            text-align: left;
+            box-shadow: 0 1px 8px rgba(67,206,162,0.07);
+        }
+        #output p {
+            color: #232526;
+            font-size: 1.04rem;
+            margin: 8px 0 0 0;
+        }
+        #output strong {
+            color: #185a9d;
+        }
+        .prediction {
             display: inline-block;
-            margin-top: 15px;
-            text-decoration: none;
-            color: #4a90e2;
-            font-weight: bold;
+            font-size: 1.1em;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: #fff;
+            margin-left: 6px;
         }
-        .back-link:hover {
-            text-decoration: underline;
+        @media (max-width: 600px) {
+            .heading-widget, .container {
+                padding: 12px 2vw 10px 2vw;
+                max-width: 98vw;
+            }
+            .main-heading {
+                font-size: 1.2rem;
+            }
+            .subtitle {
+                font-size: 0.98rem;
+            }
+            form {
+                flex-direction: column;
+                gap: 0;
+            }
+            input[type="text"] {
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            button {
+                width: 100%;
+                padding: 12px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SMS Spam Detector</h1>
-        <form method="POST" action="/predict">
-            <input type="text" name="message" placeholder="Type your message here" required>
-            <button type="submit">Detect</button>
-        </form>
-        {% if message %}
-        <div id="output">
-            <p><strong>Input:</strong> {{ message }}</p>
-            <p><strong>Prediction:</strong> {{ prediction }}</p>
+    <div class="center-stack">
+        <div class="heading-widget">
+            <h1 class="main-heading">SMS <span class="spam-highlight">Spam</span> Detector</h1>
         </div>
-        {% endif %}
+        <div class="container">
+            <div class="subtitle">Instantly check if an SMS message is spam or not using AI.</div>
+            <form method="POST" action="/predict">
+                <input type="text" name="message" placeholder="Type your message here" required autocomplete="off">
+                <button type="submit">Detect</button>
+            </form>
+            <div class="helper-text">Enter your SMS message above and click Detect to see the result.</div>
+            {% if message %}
+            <div id="output">
+                <p><strong>Input:</strong> {{ message }}</p>
+                <p><strong>Prediction:</strong> <span class="prediction">{{ prediction }}</span></p>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
