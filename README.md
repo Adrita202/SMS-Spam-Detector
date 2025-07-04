@@ -59,3 +59,6 @@ This project is an SMS Spam Detector that uses a machine learning model (Multino
 - `spam.csv`: Dataset of SMS messages.
 - `spam_classifier.pkl`, `vectorizer.pkl`: Saved model and vectorizer.
 - `templates/index.html`: Web interface template.
+
+## Screenshot
+![image](https://github.com/user-attachments/assets/b609827f-605e-47bd-a518-86c162174a57)
