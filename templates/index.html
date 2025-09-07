@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Spam Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    </head>
+<body>
+    <div class="center-stack">
+        <div class="heading-widget">
+            <h1 class="main-heading">SMS <span class="spam-highlight">Spam</span> Detector</h1>
+        </div>
+        <div class="container">
+            <div class="subtitle">Instantly check if an SMS message is spam or not using AI.</div>
+            <form id="spam-form" method="POST" action="/predict">
+                <input type="text" id="message-input" name="message" placeholder="Type your message here" required autocomplete="off" value="{{ message or '' }}">
+                <button type="submit" id="detect-btn">Detect</button>
+            </form>
+            <div class="helper-text">Enter your SMS message above and click Detect to see the result.</div>
+            {% if message and prediction %}
+            <div id="output">
+                <p><strong>Input:</strong> {{ message }}</p>
+                <p><strong>Prediction:</strong> <span class="prediction{% if prediction == 'Spam' %} spam{% endif %}">{{ prediction }}</span></p>
+                <div class="confidence-grid">
+                    <div class="conf-card">
+                        <div class="conf-value">{{ confidence }}%</div>
+                        <div class="conf-label">Overall Confidence</div>
+                    </div>
+                    <div class="conf-card">
+                        <div class="conf-value spam">{{ spam_prob }}%</div>
+                        <div class="conf-label">Spam Probability</div>
+                    </div>
+                    <div class="conf-card">
+                        <div class="conf-value ham">{{ ham_prob }}%</div>
+                        <div class="conf-label">Not Spam Probability</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill{% if prediction == 'Spam' %} spam{% endif %}" data-confidence="{{ confidence or 0 }}"></div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="history-card">
+            <div class="history-header">
+                <div>📊 Recent Predictions</div>
+                {% if history %}
+                <form method="POST" action="/clear-history" style="display: inline;">
+                    <button type="submit" class="clear-history-btn">Clear</button>
+                </form>
+                {% endif %}
+            </div>
+            {% if history %}
+                {% for item in history %}
+                <div class="history-item">
+                    <div class="history-row">
+                        <div class="history-message">{{ item.message }}</div>
+                        <div class="history-right">
+                            <span class="history-conf">{{ item.confidence }}%</span>
+                            <span class="history-pill{% if item.prediction == 'Spam' %} spam{% endif %}">{{ item.prediction }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="history-item" style="text-align:center;color:#3a3a3a;opacity:0.8;">No predictions yet. Try detecting some messages! 🚀</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('spam-form');
+        const btn = document.getElementById('detect-btn');
+        form.addEventListener('submit', function() {
+            btn.disabled = true;
+            btn.textContent = 'Analyzing...';
+        });
+
+        const input = document.getElementById('message-input');
+        if (input) input.focus();
+        input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { form.submit(); } });
+
+        // Clear input on BFCache restore only
+        window.addEventListener('pageshow', function(event) { if (event.persisted) { if (input) input.value = ''; } });
+
+        // Apply progress width from data- attribute
+        const pf = document.getElementById('progress-fill');
+        if (pf) {
+            const val = parseFloat(pf.getAttribute('data-confidence') || '0');
+            if (!Number.isNaN(val)) { pf.style.width = Math.max(0, Math.min(100, val)) + '%'; }
+        }
+    </script>
+</body>
+</html>

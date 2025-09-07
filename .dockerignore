@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.pytest_cache/
+.venv/
+venv/
+env/
+.DS_Store
+.git
+.gitignore
+node_modules/
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Local artifacts (let Docker build generate its own in training stage)
+spam_classifier.pkl
+vectorizer.pkl
+*.log
+
+

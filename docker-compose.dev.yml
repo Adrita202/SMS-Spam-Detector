@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sms-spam-detector:dev
+    ports:
+      - "8080:5000"
+    environment:
+      - LOG_LEVEL=debug
+      - SECRET_KEY=dev-secret
+      - APP_HOST=0.0.0.0
+      - APP_PORT=5000
+      - FLASK_DEBUG=1
+      - ENABLE_HSTS=0
+      - GUNICORN_WORKERS=1
+      - GUNICORN_THREADS=2
+      - GUNICORN_LOGLEVEL=debug
+      - RETRAIN_MODEL=0
+    volumes:
+      - ./:/app:rw
+    command: ["/app/entrypoint.sh"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+networks:
+  default:
+    name: sms-spam-net
+
+
