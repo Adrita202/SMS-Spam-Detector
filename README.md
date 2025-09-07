@@ -45,6 +45,8 @@ python app.py
 ```
 Visit: http://127.0.0.1:5000
 
+![Screenshot](images/Screenshot(189).png)
+
 ## 🎯 How It Works
 
 1. **Training**: Combines multiple datasets, preprocesses text, trains ML model
@@ -104,4 +106,4 @@ Key environment variables:
 
 ---
 
-⭐ **Star this repo** if you found it helpful! | 🐛 **Report issues** [here](https://github.com/yourusername/sms-spam-detector/issues) | 💬 **Questions?** Open a [discussion](https://github.com/yourusername/sms-spam-detector/discussions)
+⭐ **Star this repo** if you found it helpful! | 
