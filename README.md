@@ -9,14 +9,14 @@ A SMS spam detection system with a beautiful web interface. Built with machine l
 
 ## ✨ Features
 
-- 🤖 **Smart Detection** - TF-IDF vectorization with Multinomial Naive Bayes
-- 🎨 **Modern UI** - Glassmorphism design with confidence scores
-- 📊 **Prediction History** - Track recent predictions with confidence levels
-- 🐳 **Docker Ready** - Multi-stage build with Gunicorn for production
-- 🔒 **Secure** - Security headers, non-root container, input validation
-- 📱 **Responsive** - Works on desktop, tablet, and mobile
+- **Smart Detection** - TF-IDF vectorization with Multinomial Naive Bayes
+- **Modern UI** - Glassmorphism design with confidence scores
+- **Prediction History** - Track recent predictions with confidence levels
+- **Docker Ready** - Multi-stage build with Gunicorn for production
+- **Secure** - Security headers, non-root container, input validation
+- **Responsive** - Works on desktop, tablet, and mobile
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option 1: Docker (Recommended)
 ```bash
@@ -47,13 +47,13 @@ Visit: http://127.0.0.1:5000
 
 ![Screenshot](<Images/Screenshot (189).png>)
 
-## 🎯 How It Works
+## How It Works
 
 1. **Training**: Combines multiple datasets, preprocesses text, trains ML model
 2. **Prediction**: Vectorizes input text, classifies as spam/ham with confidence
 3. **UI**: Shows results with confidence scores and maintains prediction history
 
-## 📊 Model Performance
+##  Model Performance
 
 - **Algorithm**: TF-IDF + Multinomial Naive Bayes
 - **Features**: English stop-words removed, max_df=0.7
