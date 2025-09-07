@@ -45,7 +45,7 @@ python app.py
 ```
 Visit: http://127.0.0.1:5000
 
-![Screenshot](images/Screenshot(189).png)
+![Screenshot](Images/Screenshot(189).png)
 
 ## 🎯 How It Works
 
